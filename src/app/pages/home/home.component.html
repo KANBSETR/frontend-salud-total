@@ -1,0 +1,25 @@
+<div class="select-wrapper">
+  <label for="especialidad">Selecciona una especialidad:</label>
+  <select id="especialidad" [(ngModel)]="seleccionadaEspecialidad" (change)="onEspecialidadChange()">
+    <option disabled selected value="">-- Selecciona una opción --</option>
+    <option *ngFor="let esp of especialidades" [value]="esp.id_especialidad">
+      {{ esp.especialidad }}
+    </option>
+  </select>
+</div>
+
+<div class="select-wrapper" *ngIf="medicos.length > 0">
+  <label for="medico">Selecciona un médico:</label>
+  <select id="medico" [(ngModel)]="seleccionMedico" (change)="onMedicoChange()">
+    <option disabled selected value="">-- Selecciona un médico --</option>
+    <option *ngFor="let medico of medicos" [value]="medico.id_medico">
+      {{ getNombreCompleto(medico) }}
+    </option>
+  </select>
+</div>
+
+<app-horario
+  *ngIf="horarioId"
+  [horarioId]="horarioId"
+  (horaSeleccionada)="onHoraSeleccionada($event)"
+></app-horario>

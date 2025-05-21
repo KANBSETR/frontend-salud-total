@@ -1,0 +1,12 @@
+.bloque-hora {
+  padding: 10px 15px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.bloque-hora:hover {
+  background-color: #cce4ff;
+}

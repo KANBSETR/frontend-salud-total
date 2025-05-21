@@ -1,0 +1,10 @@
+<div class="horario-container">
+  <h3>Horas disponibles:</h3>
+  <div 
+    class="bloque-hora"
+    *ngFor="let hora of bloques"
+    (click)="seleccionarHora(hora)"
+  >
+    {{ hora }}
+  </div>
+</div>

@@ -33,3 +33,8 @@ Esto se tiene que hacer si o si ya que al final de la creación de la cita, vamo
 
 ---
 Lo más complicado es lo que menciono en el módulo de gestión de citas
+
+---
+
+## Paquetes del otro proyecto
+- npm install primeng @primeng/themes sweetalert2 ngx-cookie-service jwt-decode chart.js docx

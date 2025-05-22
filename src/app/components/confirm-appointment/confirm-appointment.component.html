@@ -1,0 +1,54 @@
+<div class="cita-container">
+  <div class="paciente-caja paciente-caja-standalone">
+    <h3>Detalles del paciente</h3>
+    <form>
+      <div class="input-row">
+        <label for="rut">RUT:</label>
+        <input id="rut" type="text" placeholder="Ej: 12345678-9" />
+      </div>
+      <div class="input-row">
+        <label for="correo">Correo electrónico:</label>
+        <input id="correo" type="email" placeholder="Ej: correo@ejemplo.com" />
+      </div>
+      <div class="input-row">
+        <label for="celular">Celular:</label>
+        <input id="celular" type="tel" placeholder="Ej: +56 9 1234 5678" />
+      </div>
+      <div class="input-row">
+        <label for="direccion">Dirección:</label>
+        <input id="direccion" type="text" placeholder="Ej: Calle 123, Ciudad" />
+      </div>
+    </form>
+  </div>
+
+  <div class="cita-box cita-box-standalone">
+    <img src="assets/images/salud_total.png" alt="Logo Salud Total" class="cita-logo" />
+    <div class="cita-title">Detalles de su cita</div>
+    <div class="resumen-cita" *ngIf="cita">
+      <div class="detalle-cita">
+        <div class="detalle-row">
+          <span class="detalle-label">Especialidad:</span>
+          <span class="detalle-value">{{ cita.especialidad }}</span>
+        </div>
+        <div class="detalle-row">
+          <span class="detalle-label">Médico:</span>
+          <span class="detalle-value">{{ cita.medico }}</span>
+        </div>
+        <div class="detalle-row">
+          <span class="detalle-label">Fecha:</span>
+          <span class="detalle-value">{{ cita.fecha }}</span>
+        </div>
+        <div class="detalle-row">
+          <span class="detalle-label">Hora:</span>
+          <span class="detalle-value">{{ cita.hora }}</span>
+        </div>
+      </div>
+    </div>
+      <div class="agendar-btn-wrapper">
+        <button class="agendar-btn-verde" type="button" (click)="confirmarCita()">
+          Agendar la cita
+        </button>
+      </div>
+  </div>
+
+</div>

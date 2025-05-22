@@ -11,12 +11,15 @@ import { CommonModule } from '@angular/common';
 })
 
 export class HorarioComponent implements OnInit {
-   @Input() horarioId!: number;
-  @Input() rutMedico!: string; // o idMedico, dependiendo de cómo manejas esto
+  @Input() horarioId!: number;
+  @Input() idMedico!: number;
+  //@Input() rutMedico!: string;
   @Input() idEspecialidad!: number;
 
-  @Output() horaSeleccionada = new EventEmitter<any>();
 
+  @Input() horaSeleccionadaMarcada: string | null = null; 
+  @Output() horaSeleccionada = new EventEmitter<any>();
+  
   bloques: string[] = [];
   fecha!: string;
 
@@ -42,7 +45,7 @@ export class HorarioComponent implements OnInit {
     finFecha.setHours(hFin, mFin, 0, 0);
 
     while (fecha < finFecha) {
-      const hora = fecha.toTimeString().slice(0, 5); // "HH:mm"
+      const hora = fecha.toTimeString().slice(0, 5); 
       bloques.push(hora);
       fecha = new Date(fecha.getTime() + 15 * 60 * 1000);
     }
@@ -51,14 +54,15 @@ export class HorarioComponent implements OnInit {
   }
 
   seleccionarHora(hora: string): void {
-    const seleccion = {
+    this.horaSeleccionada.emit({
+      id_especialidad: this.idEspecialidad,
+      id_medico: this.idMedico,
       fecha: this.fecha,
-      hora,
-      rut_medico: this.rutMedico,
-      rut_paciente: '', // lo definirás más adelante
-      id_especialidad: this.idEspecialidad
-    };
-
-    this.horaSeleccionada.emit(seleccion);
+      hora: hora
+    });
   }
+  //rut paciente
+
+  
+  
 }

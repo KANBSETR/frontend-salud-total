@@ -19,7 +19,7 @@ export interface Medico {
   providedIn: 'root'
 })
 export class EspecialidadService {
-  private baseUrl = 'http://localhost:4000';
+  private baseUrl = 'https://api.nicodia.dev';
 
   async getEspecialidades(): Promise<Especialidad[]> {
     const response = await fetch(`${this.baseUrl}/especialidades`);

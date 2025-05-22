@@ -1,0 +1,26 @@
+.logo {
+  height: 50px;
+  width: auto;
+  display: block;
+  margin-right: 1rem;
+
+}
+
+mat-toolbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}

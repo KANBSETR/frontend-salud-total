@@ -38,3 +38,11 @@ Lo más complicado es lo que menciono en el módulo de gestión de citas
 
 ## Paquetes del otro proyecto
 - npm install primeng @primeng/themes sweetalert2 ngx-cookie-service jwt-decode chart.js docx
+
+## Lo que falta 
+- En el sidebar falta que cargue el nombre del usuario y el logout que nose si lo pondremos, yo creo que no
+- En el appointment-history falta que carguen las citas, el eliminar cita y el modificar estado de la cita
+- En el book-appointment esta funcionando trae algunos datos, falta las fechas y que funcione la creacion de cita
+- El check-appointment si trae la cita correctamente pero igual verifica, no sirve ningun cambio de estado y el reprogramar tampoco aparte tampoco creo que lo hagamos pipipipipi
+- El confirm trae los datos a traves del localStorage pero no funciona el boton de agendar por lo mismo y la weaaaaaaaaaa
+- En el dashboard falta que recupere las citas y eso creo igual revisa todo mhmhmhmmhmhmhmhmmmmmmmm

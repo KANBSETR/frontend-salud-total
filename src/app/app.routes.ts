@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
-import { ConfirmAppointmentComponent } from './components/confirm-appointment/confirm-appointment.component';
-
+import { HomeComponent } from './pages/home/home.component';
+import { ConfirmAppointmentComponent } from './pages/confirm-appointment/confirm-appointment.component';
+import { BookAppointmentComponent } from './pages/book-appointment/book-appointment.component';
+import { CheckAppointmentComponent } from './pages/check-appointment/check-appointment.component';
+import { LoginComponent } from './pages/login/login.component';
 
 //Diferencia de cargar las rutas
 // Importar el componente arriba es util para componentes que se utilizan frecuentemente o deben estar disponibles inmediatamente
@@ -11,21 +14,40 @@ import { ConfirmAppointmentComponent } from './components/confirm-appointment/co
 
 export const routes: Routes = [
     {
+        path: 'home',
+        component: HomeComponent
+    },
+    {
+        path: '',
+        component: HomeComponent,
+        pathMatch: 'full'
+    },
+    {
         path: 'reservar-cita',
-
-        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+        component: BookAppointmentComponent
+    },
+    {
+        path: 'consultar-cita',
+        component: CheckAppointmentComponent
     },
     {
         path: 'confirmar-cita',
         component: ConfirmAppointmentComponent
     },
     {
-        path: 'consultar-cita',
-        loadComponent: () => import('./components/check-appointment/check-appointment.component').then(m => m.CheckAppointmentComponent)
+        path: 'login',
+        component: LoginComponent
+
     },
     {
-        path: '',
-        redirectTo: 'reservar-cita',
-        pathMatch: 'full'
-    }
+        path: 'dashboard',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent)
+    },
+    {
+        path: 'appointment-history',
+        loadComponent: () => import('./pages/appointment-history/appointment-history.component').then(m => m.AppointmentHistoryComponent)
+    },
+    {   path: '**', 
+        redirectTo: '/home' } // Ruta comodín para redirigir al home
+
 ];

@@ -28,7 +28,7 @@ constructor(private citasService: CitasService,  private router: Router) {}
     this.cita = null;
     try {
       this.cita = await this.citasService.getCitaPorRut(this.rut.trim());
-      // Si la API retorna un array, toma el primer elemento
+      // Toma el primer elemento
       this.cita = Array.isArray(this.cita) ? this.cita[0] : this.cita;
     } catch (error) {
       this.cita = null;

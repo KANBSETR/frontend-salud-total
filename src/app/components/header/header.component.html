@@ -1,15 +1,24 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
+    <button mat-button class="logo-btn" routerLink="/">
+      <img src="assets/images/salud_total.png" alt="Logo Salud Total" class="logo" />
+    </button>
 
-    <img src="assets/images/salud_total.png" alt="Logo" class="logo" />
-    
     <span class="spacer"></span>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/">Inicio</button>
-    </mat-menu>
+    <nav class="menu-top">
+      <ul class="menu">
+        <li>
+          <button mat-raised-button color="accent" class="header-btn" routerLink="/reservar-cita">
+            Reserva de hora
+          </button>
+        </li>
+        <li>
+          <button mat-raised-button color="accent" class="header-btn" routerLink="/consultar-cita">
+            Consultar cita
+          </button>
+        </li>
+      </ul>
+    </nav>
   </mat-toolbar-row>
 </mat-toolbar>

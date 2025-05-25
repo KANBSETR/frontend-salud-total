@@ -1,0 +1,58 @@
+<div class="cita-container">
+  <div class="cita-box">
+    <img src="assets/images/salud_total.png" alt="Logo Salud Total" class="cita-logo" />
+    <div class="cita-title">Consultar reserva</div>
+
+    <form class="select-wrapper consulta-form" autocomplete="off" novalidate (submit)="buscarReserva()">
+      <label for="rut">RUT del paciente:</label>
+      <input
+        id="rut"
+        type="text"
+        [(ngModel)]="rut"
+        name="rut"
+        placeholder="Formato: 12345678-9"
+        required
+        class="consulta-input"
+        autocomplete="off"
+      />
+      <button
+        class="agendar-cita-btn consulta-btn"
+        type="submit"
+        [disabled]="!rut || rut.trim().length < 9"
+      >
+        Buscar reserva
+      </button>
+    </form>
+  </div>
+
+  <div *ngIf="cita" class="paciente-caja paciente-caja-standalone">
+    <h3>Detalle de la cita</h3>
+    <form>
+      <div class="input-row">
+        <label>Fecha:</label>
+        <input type="text" [value]="cita.fecen | date:'yyyy-MM-dd'" readonly />
+      </div>
+      <div class="input-row">
+        <label>Hora inicio:</label>
+        <input type="text" [value]="cita.horacitainicio | date:'shortTime'" readonly />
+      </div>
+      <div class="input-row">
+        <label>Hora término:</label>
+        <input type="text" [value]="cita.horacitatermino | date:'shortTime'" readonly />
+      </div>
+      <div class="input-row">
+        <label>ID Médico:</label>
+        <input type="text" [value]="cita.idmedico" readonly />
+      </div>
+    </form>
+    <div class="botones-cita">
+      <button class="consulta-btn" (click)="confirmarCita()">Confirmar</button>
+      <button class="consulta-btn consulta-btn-cancelar" (click)="cancelarCita()">Cancelar</button>
+      <button class="consulta-btn consulta-btn-reprogramar" (click)="reprogramarCita()">Reprogramar</button>
+    </div>
+  </div>
+
+  <div *ngIf="buscado && !cita" class="resumen-cita resumen-error">
+    <h3>No se encontró una reserva para el RUT ingresado.</h3>
+  </div>
+</div>

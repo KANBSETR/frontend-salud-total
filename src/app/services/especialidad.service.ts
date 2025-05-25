@@ -4,7 +4,9 @@ export interface Especialidad {
   id_especialidad: number;
   especialidad: string;
 }
-
+// No recuerdo los campos y lo intente con los datos que vi pero 
+// no me salio asi que ahi vei tu como lo hablamos aparte no se cuales endpoints dejaste
+// ......................
 export interface Medico {
   id_medico: number;
   rut_medico: string;
@@ -19,7 +21,7 @@ export interface Medico {
   providedIn: 'root'
 })
 export class EspecialidadService {
-  private baseUrl = 'api';
+  private baseUrl = 'tuAPIchula';
 
   async getEspecialidades(): Promise<Especialidad[]> {
     const response = await fetch(`${this.baseUrl}/especialidades`);

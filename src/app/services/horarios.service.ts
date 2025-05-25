@@ -12,7 +12,7 @@ export interface Horario {
   providedIn: 'root'
 })
 export class HorariosService {
-  private baseUrl = 'api';
+  private baseUrl = 'tuAPIchula';
 
   async getHorarioMedico(id: number): Promise<Horario> {
     const res = await fetch(`${this.baseUrl}/medicos/horario/${id}`);
@@ -21,7 +21,7 @@ export class HorariosService {
   }
 
   async getHorarioPorMedico(id_medico: number): Promise<number> {
-  const res = await fetch(`api/medicos/horario/${id_medico}`);
+  const res = await fetch(`tuAPIchula/medicos/horario/${id_medico}`);
   if (!res.ok) throw new Error('Error al obtener horario');
   const data = await res.json();
   return data.id_horario;

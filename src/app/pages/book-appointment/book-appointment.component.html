@@ -1,0 +1,65 @@
+<div class="cita-container">
+  <div class="cita-box">
+    <img src="assets/images/salud_total.png" alt="Logo Salud Total" class="cita-logo" />
+    <div class="cita-title">Agenda tu cita médica</div>
+
+    <div class="select-wrapper">
+      <label for="especialidad">Seleccione una especialidad:</label>
+      <select id="especialidad" [(ngModel)]="seleccionadaEspecialidad" (change)="onEspecialidadChange()">
+        <option disabled selected value="">-- Seleccione una opción --</option>
+        <option *ngFor="let esp of especialidades" [value]="esp.idespecialidad">
+          {{ esp.nomespe}}
+        </option>
+      </select>
+    </div>
+
+    <div class="select-wrapper">
+      <label for="medico">Seleccione un médico:</label>
+      <select id="medico" [(ngModel)]="seleccionMedico" (change)="onMedicoChange()"
+        [disabled]="!seleccionadaEspecialidad">
+        <option disabled selected value="">-- Seleccione un medico -- </option>
+        <ng-container *ngIf="seleccionadaEspecialidad">
+          <option *ngFor="let medico of medicos" [value]="medico.idmedico">
+            {{ getNombreCompleto(medico) }}
+          </option>
+        </ng-container>
+      </select>
+    </div>
+
+    <!-- Sidebar de fechas y lista de citas agendadas y horario -->
+    <div class="agenda-section" *ngIf="seleccionadaEspecialidad && seleccionMedico">
+      <div class="agenda-sidebar">
+        <div class="fechas-header">
+          <h4>Fechas</h4>
+        </div>
+        <div class="fechas-grid">
+          <div *ngFor="let fecha of fechasDisponibles" class="fecha-item" [class.selected]="fecha === fechaSeleccionada"
+            (click)="seleccionarFecha(fecha)">
+            {{ fecha }}
+          </div>
+        </div>
+      </div>
+      <div class="agenda-list">
+        <div class="horario-header">
+          <h4>Horas disponibles</h4>
+        </div>
+        <app-horario
+            *ngIf="horarioId"
+            [horarioId]="horarioId"
+            [fechaSeleccionada]="fechaSeleccionada"
+            [idEspecialidad]="seleccionadaEspecialidad"
+            [idMedico]="seleccionMedico"
+            [horaSeleccionadaMarcada]="horaSeleccionada"
+            (horaSeleccionada)="onHoraSeleccionada($event)">  
+        </app-horario>
+
+
+      </div>
+    </div>
+    <div *ngIf="horaSeleccionada" class="agendar-cita-btn-wrapper">
+      <button class="agendar-cita-btn" (click)="agendarCita()">
+        Agendar cita
+      </button>
+    </div>
+  </div>
+</div>

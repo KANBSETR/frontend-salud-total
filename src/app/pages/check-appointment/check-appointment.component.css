@@ -1,0 +1,228 @@
+.cita-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-top: 40px;
+  gap: 1.5rem;
+}
+
+.cita-box {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+}
+
+.cita-logo {
+  display: block;
+  margin: 0 auto 1.5rem;
+  max-width: 120px;
+}
+
+.cita-title {
+  text-align: center;
+  color: #007BFF;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.consulta-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.consulta-input {
+  padding: 12px 14px;
+  font-size: 1.1rem;
+  border: 1.5px solid #007BFF;
+  border-radius: 8px;
+  background-color: #f0f4ff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 0.2rem;
+}
+
+.consulta-input:focus {
+  border-color: #43a047;
+  outline: none;
+  box-shadow: 0 0 0 2px #43a04733;
+}
+
+.consulta-btn {
+  background: #43a047;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(67,160,71,0.08);
+  transition: background 0.2s;
+}
+
+.consulta-btn:disabled {
+  background: #bdbdbd;
+  cursor: not-allowed;
+}
+
+.consulta-btn:hover:not(:disabled) {
+  background: #388e3c;
+}
+
+.paciente-caja {
+  background: #f0f4ff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,123,255,0.06);
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.paciente-caja h3 {
+  color: #007BFF;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.input-row label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.input-row input {
+  padding: 9px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border-color 0.3s;
+}
+
+.input-row input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+.resumen-cita {
+  background: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  padding: 1.2rem 1.5rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 8px rgba(67,160,71,0.06);
+  text-align: center;
+}
+
+.resumen-error {
+  background: #ffebee;
+  border-left: 4px solid #e53935;
+  color: #b71c1c;
+}
+
+@media (max-width: 600px) {
+  .cita-box, .paciente-caja {
+    padding: 1rem;
+    max-width: 98vw;
+  }
+}
+
+
+.botones-cita {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+.consulta-btn-cancelar {
+  background: #e53935;
+}
+
+.consulta-btn-cancelar:hover {
+  background: #b71c1c;
+}
+
+.consulta-btn-reprogramar {
+  background: #bdbdbd;
+  color: #333;
+}
+
+.consulta-btn-reprogramar:hover {
+  background: #757575;
+  color: #fff;
+}
+
+
+.citas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-img {
+  width: 50px;
+  height: 50px;
+}
+
+.card-titles h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.card-content p {
+  margin: 0.25rem 0;
+}
+
+.card-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.card-actions button {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.card-actions button:hover {
+  background-color: #115293;
+}

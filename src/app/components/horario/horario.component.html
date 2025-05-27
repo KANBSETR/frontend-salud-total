@@ -1,4 +1,4 @@
-<div class="horario-container">
+<div class="horario-container" *ngIf="bloques.length > 0; else sinHoras">
   <div class="horario-grid">
     <div 
       class="bloque-hora"
@@ -10,3 +10,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #sinHoras>
+  <p class="mensaje-sin-horas">No hay horas disponibles para esta fecha.</p>
+</ng-template>

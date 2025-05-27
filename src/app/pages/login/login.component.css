@@ -1,0 +1,48 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5; /* Fondo claro */
+}
+
+.login-box {
+  background: #ffffff; /* Fondo blanco */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-logo {
+  display: block;
+  margin: 0 auto 1rem;
+  max-width: 150px;
+}
+
+.text-center {
+  text-align: center;
+  color: #333; /* Color oscuro para el texto */
+}
+
+.login-input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.login-button {
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.logged-in-message h2 {
+  color: #4caf50; /* Verde para el saludo */
+}
+
+.logged-in-message p {
+  color: #333; /* Color oscuro para el texto */
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}

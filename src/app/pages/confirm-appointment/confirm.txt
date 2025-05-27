@@ -1,0 +1,36 @@
+
+/*
+confirmarCita() {
+  Swal.fire({
+    title: '¿Desea confirmar?',
+    text: 'Su cita está a punto de ser agendada, ¿desea confirmar?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, confirmo',
+    cancelButtonText: 'No, cancelar',
+    confirmButtonColor: '#43a047',
+    cancelButtonColor: '#d33',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch('https://tuAPIchula/citas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.cita)
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Error al agendar la cita');
+        return res.json();
+      })
+      .then(() => {
+        Swal.fire('¡Cita agendada!', 'Su cita ha sido confirmada, se le enviará un correo con el detalle de la cita.', 'success').then(() => {
+          this.router.navigate(['/']);
+        });
+      })
+      .catch(() => {
+        Swal.fire('Error', 'No se pudo agendar la cita.', 'error');
+      });
+    }
+  });
+}
+*/

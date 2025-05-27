@@ -1,25 +1,13 @@
 import { Injectable } from '@angular/core';
-
-export interface Especialidad {
-  id_especialidad: number;
-  especialidad: string;
-}
-
-export interface Medico {
-  id_medico: number;
-  rut_medico: string;
-  primer_nombre: string;
-  segundo_nombre: string;
-  apellido_paterno: string;
-  apellido_materno: string;
-  id_especialidad: number;
-}
+import { Especialidad } from '../models/especialidad';
+import { Medico } from '../models/medico';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EspecialidadService {
-  private baseUrl = 'https://api.nicodia.dev';
+  private baseUrl = "https://api.nicodia.dev";
+  // private baseUrl = "http://localhost:4000";
 
   async getEspecialidades(): Promise<Especialidad[]> {
     const response = await fetch(`${this.baseUrl}/especialidades`);
@@ -28,7 +16,7 @@ export class EspecialidadService {
   }
 
   async getMedicosPorEspecialidad(idEspecialidad: number): Promise<Medico[]> {
-    const response = await fetch(`${this.baseUrl}/medicos/idEspecialidad/${idEspecialidad}`);
+    const response = await fetch(`${this.baseUrl}/medicos/especialidad/${idEspecialidad}`);
     if (!response.ok) throw new Error('Error al obtener médicos');
     return await response.json();
   }

@@ -1,0 +1,14 @@
+    <!-- Mostrar mensaje si el usuario ya está logueado -->
+    <div class="logged-in-message"> <!--  *ngIf="loggedInUser; else loginForm" -->
+      <img src="assets/images/salud_total.png" alt="Logo" class="login-logo" />
+      <h2 class="text-center">¡Hola!</h2>
+      <p class="text-center">
+        Has iniciado sesión con el usuario <strong>Usuario logeado</strong>. <!-- {{ loggedInUser }} --> 
+      </p>
+      <p class="text-center">
+        ¿Estás seguro de que deseas cerrar la sesión?
+      </p>
+      <div class="text-center">
+        <button mat-raised-button color="warn" class="login-button" >Cerrar sesión</button> <!--  (click)="logout()" -->
+      </div>
+    </div>

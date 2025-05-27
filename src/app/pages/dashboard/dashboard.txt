@@ -1,0 +1,39 @@
+  // constructor(private http: HttpClient) {} // 
+
+  ngOnInit() {
+    // Recupera el nombre del usuario desde localStorage 
+    this.userName = localStorage.getItem('userName') || 'Usuario';
+
+    /*
+    this.http.get('https://tuAPIchula/dashboard-data').subscribe({
+      next: (data: any) => {
+        this.chartData = data.chartData;
+        // this.chartData.labels = data.labels;
+        // this.chartData.datasets = data.datasets;
+      },
+      error: (err) => {
+        console.error('Error al obtener datos del dashboard:', err);
+      }
+    });
+    */
+  }
+-----------------------------------------------------------------------------------------------------------------------------
+  // ngOnInit() {
+  //   this.loadUserName();
+  // }
+
+  // // Método para cargar el nombre del usuario desde el token
+  // loadUserName() {
+  //   const token = this.cookieService.get('authToken');
+  //   if (token) {
+  //     try {
+  //       const decoded: any = jwtDecode(token);
+  //       this.userName = decoded.name; 
+  //     } catch (error) {
+  //       console.error('Error al decodificar el token:', error);
+  //       this.userName = 'Usuario';
+  //     }
+  //   } else {
+  //     this.userName = 'Usuario';
+  //   }
+  // }

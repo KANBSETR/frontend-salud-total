@@ -1,0 +1,33 @@
+  ngOnInit() {
+    /*
+    fetch('https://tuAPIchula/citas/historial')
+      .then(res => res.json())
+      .then(data => {
+        // Recordar mapear los datos al formato esperado por la tabla
+        this.appointments = data;
+      })
+      .catch(err => {
+        console.error('Error al obtener el historial de citas:', err);
+        Swal.fire('Error', 'No se pudo cargar el historial de citas.', 'error');
+      });
+    */
+  }
+
+        // Para eliminarla m, hmhmammmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+
+        // fetch(`https://tuAPIchula/citas/${appointment.id}`, { method: 'DELETE' })
+        //   .then(() => {
+        //     this.appointments = this.appointments.filter(a => a !== appointment);
+        //   });
+
+
+
+        // Para actualizar el estado de la cita
+
+            // fetch(`https://tuAPIchula/citas/${appointment.id}/asistencia`, {
+        //   method: 'PUT',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ status: result.value })
+        // }).then(() => {
+        //   appointment.status = result.value;
+        // });

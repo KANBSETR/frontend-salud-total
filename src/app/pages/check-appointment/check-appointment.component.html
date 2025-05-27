@@ -5,54 +5,38 @@
 
     <form class="select-wrapper consulta-form" autocomplete="off" novalidate (submit)="buscarReserva()">
       <label for="rut">RUT del paciente:</label>
-      <input
-        id="rut"
-        type="text"
-        [(ngModel)]="rut"
-        name="rut"
-        placeholder="Formato: 12345678-9"
-        required
-        class="consulta-input"
-        autocomplete="off"
-      />
-      <button
-        class="agendar-cita-btn consulta-btn"
-        type="submit"
-        [disabled]="!rut || rut.trim().length < 9"
-      >
+      <input id="rut" type="text" [(ngModel)]="rut" name="rut" placeholder="Formato: 12345678-9" required
+        class="consulta-input" autocomplete="off" />
+      <button class="agendar-cita-btn consulta-btn" type="submit" [disabled]="!rut || rut.trim().length < 9">
         Buscar reserva
       </button>
     </form>
   </div>
 
-  <div *ngIf="cita" class="paciente-caja paciente-caja-standalone">
-    <h3>Detalle de la cita</h3>
-    <form>
-      <div class="input-row">
-        <label>Fecha:</label>
-        <input type="text" [value]="cita.fecen | date:'yyyy-MM-dd'" readonly />
+  <div *ngIf="citas && citas.length > 0; else sinCitas" class="citas-grid">
+    <div *ngFor="let cita of citas" class="card">
+      <div class="card-header">
+        <img src="https://cdn-icons-png.flaticon.com/128/833/833593.png" alt="Icono" class="card-img" />
+        <div class="card-titles">
+          <h3>Cita Médica</h3>
+        </div>
       </div>
-      <div class="input-row">
-        <label>Hora inicio:</label>
-        <input type="text" [value]="cita.horacitainicio | date:'shortTime'" readonly />
+
+      <div class="card-content">
+        <p><strong>Fecha:</strong> {{ getFecha(cita.fecen) }}</p>
+        <p><strong>Hora Inicio:</strong> {{ getHora(cita.horacitainicio) }}</p>
       </div>
-      <div class="input-row">
-        <label>Hora término:</label>
-        <input type="text" [value]="cita.horacitatermino | date:'shortTime'" readonly />
+
+      <div class="card-actions">
+        <button (click)="cancelarCita(cita.token_cita)">CANCELAR</button>
+        <button (click)="reprogramarCita(cita.token_cita)">REPROGRAMAR</button>
       </div>
-      <div class="input-row">
-        <label>ID Médico:</label>
-        <input type="text" [value]="cita.idmedico" readonly />
-      </div>
-    </form>
-    <div class="botones-cita">
-      <button class="consulta-btn" (click)="confirmarCita()">Confirmar</button>
-      <button class="consulta-btn consulta-btn-cancelar" (click)="cancelarCita()">Cancelar</button>
-      <button class="consulta-btn consulta-btn-reprogramar" (click)="reprogramarCita()">Reprogramar</button>
     </div>
   </div>
 
-  <div *ngIf="buscado && !cita" class="resumen-cita resumen-error">
-    <h3>No se encontró una reserva para el RUT ingresado.</h3>
-  </div>
+  <ng-template #sinCitas>
+    <div class="resumen-cita resumen-error">
+      <h3>No se encontró una reserva para el RUT ingresado.</h3>
+    </div>
+  </ng-template>
 </div>

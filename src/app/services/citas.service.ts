@@ -20,7 +20,7 @@ export class CitasService {
     return await response.json();
   }
 
-    async crearCita(cita: Partial<Cita>): Promise<Cita> {
+  async crearCita(cita: Partial<Cita>): Promise<Cita> {
     const response = await fetch(`${this.baseUrl}/citas/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

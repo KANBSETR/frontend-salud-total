@@ -19,3 +19,12 @@ export interface CitaSend {
     rutMedico: string;
     rutPaciente: string;
 }
+
+export interface CitaResponse {
+    idcita: string;
+    fecen: string;
+    horacitainicio: string;
+    horacitatermino: string;
+    idmedico: string;
+    token_cita: string;
+}

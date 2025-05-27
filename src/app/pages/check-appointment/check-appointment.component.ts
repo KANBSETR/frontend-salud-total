@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-
+import { CitaResponse } from '../../models/cita';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CitasService } from '../../services/citas.service';
@@ -16,27 +16,31 @@ import { CitasService } from '../../services/citas.service';
   styleUrl: './check-appointment.component.css'
 })
 export class CheckAppointmentComponent {
+  rut: string = '';
+  buscado: boolean = false;
+  citas: CitaResponse[] = [];
 
-rut: string = '';
-buscado = false;
-cita: any = null;
 
-constructor(private citasService: CitasService,  private router: Router) {}
+  constructor(private citasService: CitasService, private router: Router) { }
 
-  async buscarReserva() {
+  // Buscar citas por RUT
+  async buscarReserva(): Promise<boolean> {
     this.buscado = true;
-    this.cita = null;
+    this.citas = [];
+
     try {
-      this.cita = await this.citasService.getCitaPorRut(this.rut.trim());
-      // Toma el primer elemento
-      this.cita = Array.isArray(this.cita) ? this.cita[0] : this.cita;
+      const resultado = await this.citasService.getCitaPorRut(this.rut.trim());
+      this.citas = Array.isArray(resultado) ? resultado : [resultado];
     } catch (error) {
-      this.cita = null;
+      console.error('Error al buscar citas:', error);
+      this.citas = [];
     }
-    return false; // Evita recarga del formulario
+
+    return false; // Evita que el formulario se recargue
   }
 
-  confirmarCita() {
+  // Confirmar cita
+  confirmarCita(token: string): void {
     Swal.fire({
       title: '¿Desea confirmar la cita?',
       text: '¿Está seguro que desea confirmar esta cita?',
@@ -49,12 +53,14 @@ constructor(private citasService: CitasService,  private router: Router) {}
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        // Aquí puedes llamar a un servicio para confirmar
         Swal.fire('¡Cita confirmada!', 'La cita ha sido confirmada exitosamente.', 'success');
       }
     });
   }
 
-  cancelarCita() {
+  // Cancelar cita
+  cancelarCita(token: string): void {
     Swal.fire({
       title: '¿Desea cancelar la cita?',
       text: 'Esta acción no se puede deshacer. ¿Está seguro?',
@@ -67,15 +73,17 @@ constructor(private citasService: CitasService,  private router: Router) {}
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        // Aquí puedes llamar a un servicio para cancelar
         Swal.fire('Cita cancelada', 'La cita ha sido cancelada.', 'success');
-        this.cita = null;
-        this.buscado = false;
-        this.rut = '';
+
+        // Opcional: eliminar de la lista sin volver a llamar al backend
+        this.citas = this.citas.filter(c => c.token_cita !== token);
       }
     });
   }
 
-  reprogramarCita() {
+  // Reprogramar cita
+  reprogramarCita(token: string): void {
     Swal.fire({
       title: 'Reprogramar cita',
       text: 'Será redirigido para reprogramar su cita.',
@@ -83,7 +91,19 @@ constructor(private citasService: CitasService,  private router: Router) {}
       confirmButtonText: 'Continuar',
       confirmButtonColor: '#007BFF'
     }).then(() => {
-      this.router.navigate(['/reservar-cita']);
+      this.router.navigate(['/reservar-cita'], { queryParams: { token } });
+    });
+  }
+
+  // Helpers de formato
+  getFecha(datetime: string): string {
+    return new Date(datetime).toLocaleDateString('es-CL');
+  }
+
+  getHora(datetime: string): string {
+    return new Date(datetime).toLocaleTimeString('es-CL', {
+      hour: '2-digit',
+      minute: '2-digit'
     });
   }
 }

@@ -1,30 +1,16 @@
 import { Injectable } from '@angular/core';
-
-export interface Horario {
-  id_horario: number;
-  fecha: string; 
-  hora_inicio: string; 
-  hora_salida: string; 
-  id_medico: number;
-}
+import { Horario } from '../models/horario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HorariosService {
-  private baseUrl = 'tuAPIchula';
+  private baseUrl = "https://api.nicodia.dev";
+  // private baseUrl = "http://localhost:4000";
 
-  async getHorarioMedico(id: number): Promise<Horario> {
+  async getHorarioMedico(id: any): Promise<Horario[]> {
     const res = await fetch(`${this.baseUrl}/medicos/horario/${id}`);
     if (!res.ok) throw new Error('Error al obtener horario');
     return await res.json();
   }
-
-  async getHorarioPorMedico(id_medico: number): Promise<number> {
-  const res = await fetch(`tuAPIchula/medicos/horario/${id_medico}`);
-  if (!res.ok) throw new Error('Error al obtener horario');
-  const data = await res.json();
-  return data.id_horario;
-}
-
 }

@@ -1,22 +1,25 @@
 <div class="cita-container">
   <div class="paciente-caja paciente-caja-standalone">
     <h3>Detalles del paciente</h3>
-    <form>
+    <form (ngSubmit)="confirmarCita()">
       <div class="input-row">
         <label for="rut">RUT:</label>
-        <input id="rut" type="text" placeholder="Ej: 12345678-9" />
+        <input id="rut" type="text" [(ngModel)]="rut" name="rut" placeholder="Ej: 12345678-9" required />
       </div>
       <div class="input-row">
         <label for="correo">Correo electrónico:</label>
-        <input id="correo" type="email" placeholder="Ej: correo@ejemplo.com" />
+        <input id="correo" type="email" [(ngModel)]="correo" name="correo" placeholder="Ej: correo@ejemplo.com"
+          required />
       </div>
       <div class="input-row">
         <label for="celular">Celular:</label>
-        <input id="celular" type="tel" placeholder="Ej: +56 9 1234 5678" />
+        <input id="celular" type="tel" [(ngModel)]="celular" name="celular" placeholder="Ej: +56 9 1234 5678"
+          required />
       </div>
       <div class="input-row">
         <label for="direccion">Dirección:</label>
-        <input id="direccion" type="text" placeholder="Ej: Calle 123, Ciudad" />
+        <input id="direccion" type="text" [(ngModel)]="direccion" name="direccion" placeholder="Ej: Calle 123, Ciudad"
+          required />
       </div>
     </form>
   </div>
@@ -28,11 +31,11 @@
       <div class="detalle-cita">
         <div class="detalle-row">
           <span class="detalle-label">Especialidad:</span>
-          <span class="detalle-value">{{ cita.especialidad }}</span>
+          <span class="detalle-value">{{ infoMedico.especialidad }}</span>
         </div>
         <div class="detalle-row">
           <span class="detalle-label">Médico:</span>
-          <span class="detalle-value">{{ cita.medico }}</span>
+          <span class="detalle-value">{{ infoMedico.medico }}</span>
         </div>
         <div class="detalle-row">
           <span class="detalle-label">Fecha:</span>
@@ -40,15 +43,15 @@
         </div>
         <div class="detalle-row">
           <span class="detalle-label">Hora:</span>
-          <span class="detalle-value">{{ cita.hora }}</span>
+          <span class="detalle-value">{{ cita.horaInicio }}</span>
         </div>
       </div>
     </div>
-      <div class="agendar-btn-wrapper">
-        <button class="agendar-btn-verde" type="button" (click)="confirmarCita()">
-          Agendar la cita
-        </button>
-      </div>
+    <div class="agendar-btn-wrapper">
+      <button class="agendar-btn-verde" type="button" (click)="confirmarCita()">
+        Agendar la cita
+      </button>
+    </div>
   </div>
 
 </div>

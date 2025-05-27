@@ -1,67 +1,39 @@
+.horario-container {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+.horario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+}
+
 .bloque-hora {
-  padding: 10px 15px;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
+  padding: 8px 12px;
+  text-align: center;
   border-radius: 8px;
-  font-weight: bold;
+  border: 1px solid #007bff;
+  color: #007bff;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
 }
 
 .bloque-hora:hover {
-  background-color: #cce4ff;
+  background-color: #007bff;
+  color: white;
 }
 
-.horario-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 14px;
-  margin-top: 1rem;
+.bloque-hora.selected {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
 }
 
-.bloque-hora {
-  padding: 12px 0;
-  background-color: #f0f4ff;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.2s, color 0.2s;
-  border: 1px solid #c3dafe;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-.bloque-hora:hover, .bloque-hora.selected {
-  background-color: #007BFF;
-  color: #fff;
-  border-color: #007BFF;
-}
-
-
-.horario-container {
-  margin-top: 0; /* Antes estaba en 1.5rem, ahora sin margen para subirlo */
-}
-
-.horario-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-top: 0rem; /* Menos espacio arriba */
-}
-
-.bloque-hora {
-  padding: 12px 0;
-  background-color: #f0f4ff;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.2s, color 0.2s;
-  border: 1px solid #c3dafe;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-.bloque-hora:hover, .bloque-hora.selected {
-  background-color: #007BFF;
-  color: #fff;
-  border-color: #007BFF;
+.mensaje-sin-horas {
+  color: #888;
+  font-style: italic;
 }

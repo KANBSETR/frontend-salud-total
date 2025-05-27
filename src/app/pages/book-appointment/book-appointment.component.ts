@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EspecialidadService, Especialidad, Medico } from '../../services/especialidad.service';
+import { EspecialidadService } from '../../services/especialidad.service';
+import { Especialidad } from '../../models/especialidad';
+import { Medico } from '../../models/medico';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HorariosService } from '../../services/horarios.service';
@@ -7,6 +9,7 @@ import { HorarioComponent } from '../../components/horario/horario.component';
 import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
+import { Cita } from '../../models/cita';
 @Component({
   selector: 'app-book-appointment',
   imports: [FormsModule, CommonModule, HorarioComponent],
@@ -14,31 +17,48 @@ import Swal from 'sweetalert2';
   styleUrl: './book-appointment.component.css'
 })
 export class BookAppointmentComponent implements OnInit {
+  fechasDisponibles: string[] = [];
+  horarioId: any;
+  horaSeleccionada: string | null = null;
 
   especialidades: Especialidad[] = [];
   medicos: Medico[] = [];
   rutMedicoSeleccionado: string = '';
 
-  horarioId?: number;
   seleccionadaEspecialidad?: number;
   seleccionMedico?: number;
 
-  horaSeleccionada: string | null = null;
+  citaSeleccionada: any;
+  infoMedico: any;
 
-  citaSeleccionada: any = null; 
 
-  fechasDisponibles: string[] = [
-    '2024-07-01', '2024-07-02', '2024-07-03', '2024-07-04', '2024-07-05',
-    '2024-07-06', '2024-07-07', '2024-07-08', '2024-07-09', '2024-07-10',
-    '2024-07-11', '2024-07-12', '2024-07-13', '2024-07-14', '2024-07-15'
-  ];
+  async cargarHorarioMedico(idMedico: number) {
+    try {
+      const horarios = await this.servicioHorario.getHorarioMedico(idMedico);
+      // Extraer fechas disponibles
+      this.fechasDisponibles = horarios.map((h: any) => {
+        const fecha = new Date(h.horasalida);
+        return fecha.toLocaleDateString('es-ES', {
+          weekday: 'long',
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
+      });
 
-  fechaSeleccionada: string = this.fechasDisponibles[0];
+      // Guardar horario completo si necesitas pasarlo a <app-horario>
+      this.horarioId = horarios;
 
-  seleccionarFecha(fecha: string) {
-    this.fechaSeleccionada = fecha;
+    } catch (error) {
+      console.error('Error al cargar horario:', error);
+    }
   }
 
+  fechaSeleccionada: string = '';
+
+  seleccionarFecha(fecha: string): void {
+    this.fechaSeleccionada = fecha;
+  }
   constructor(private servicio: EspecialidadService, private servicioHorario: HorariosService, private router: Router) { }
 
   async ngOnInit(): Promise<void> {
@@ -48,35 +68,53 @@ export class BookAppointmentComponent implements OnInit {
   async onEspecialidadChange(): Promise<void> {
     if (!this.seleccionadaEspecialidad) return;
     this.medicos = await this.servicio.getMedicosPorEspecialidad(this.seleccionadaEspecialidad);
+    console.log('Médicos cargados:', this.medicos);
   }
 
   async onMedicoChange(): Promise<void> {
     if (!this.seleccionMedico) return;
-    const medico = this.medicos.find(m => m.id_medico === this.seleccionMedico);
-    this.rutMedicoSeleccionado = medico ? medico.rut_medico : '';
-    this.horarioId = await this.servicioHorario.getHorarioPorMedico(this.seleccionMedico);
+    const medico = this.medicos.find(m => m.idmedico === this.seleccionMedico);
+    this.rutMedicoSeleccionado = medico ? medico.rut : '';
+    this.horarioId = await this.servicioHorario.getHorarioMedico(this.seleccionMedico);
+    this.fechasDisponibles = this.horarioId.map((h: any) => {
+      const fecha = new Date(h.horasalida);
+      return fecha.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+    });
   }
 
-
   getNombreCompleto(medico: Medico): string {
-    return `${medico.primer_nombre} ${medico.segundo_nombre} ${medico.apellido_paterno} ${medico.apellido_materno}`;
+    return `${medico.nombre} ${medico.appaterno} ${medico.apmaterno}`;
   }
 
   onHoraSeleccionada(cita: any): void {
     this.horaSeleccionada = cita.hora;
-  
-    const especialidadObj = this.especialidades.find(e => e.id_especialidad == cita.id_especialidad);
-    const medicoObj = this.medicos.find(m => m.id_medico == cita.id_medico);
-  
-    this.citaSeleccionada = {
-      id_especialidad: cita.id_especialidad,
-      especialidad: especialidadObj ? especialidadObj.especialidad : '',
-      id_medico: cita.id_medico,
-      medico: medicoObj ? this.getNombreCompleto(medicoObj) : '',
-      fecha: cita.fecha,
-      hora: cita.hora
+    const medicoSeleccionado = this.medicos.find(m => m.idmedico === this.seleccionMedico);
+    const especialidadSeleccionada = this.especialidades.find(e => e.idespecialidad === this.seleccionadaEspecialidad);
+    this.infoMedico = {
+      medico: medicoSeleccionado ? this.getNombreCompleto(medicoSeleccionado) : '',
+      especialidad: especialidadSeleccionada ? especialidadSeleccionada.nomespe : '',
     };
-  
+    // Parse la hora de inicio
+    const horaInicioDate = new Date(`1970-01-01T${cita.hora}:00`);
+    // Sumar 15 minutos
+    const horaTerminoDate = new Date(horaInicioDate.getTime() + 15 * 60000);
+    // Formatear la hora de término a "HH:mm"
+    const horaTermino = horaTerminoDate.toTimeString().slice(0,5);
+
+    this.citaSeleccionada = {
+      fecha: cita.fecha,
+      horaInicio: cita.hora,
+      horaTermino: horaTermino,
+      correo: '',
+      rutMedico: this.rutMedicoSeleccionado,
+      rutPaciente: '', // Esto se cargará después
+    };
+    
+    console.log('Información del médico:', this.infoMedico);
     console.log('Cita seleccionada:', this.citaSeleccionada);
   }
 
@@ -95,6 +133,7 @@ export class BookAppointmentComponent implements OnInit {
       if (result.isConfirmed) {
         // Guarda los datos en localStorage
         localStorage.setItem('citaSeleccionada', JSON.stringify(this.citaSeleccionada));
+        localStorage.setItem('infoMedico', JSON.stringify(this.infoMedico));
         this.router.navigate(['/confirmar-cita']); //Limpiar dsp
       }
     });

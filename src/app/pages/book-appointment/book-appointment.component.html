@@ -7,21 +7,19 @@
       <label for="especialidad">Seleccione una especialidad:</label>
       <select id="especialidad" [(ngModel)]="seleccionadaEspecialidad" (change)="onEspecialidadChange()">
         <option disabled selected value="">-- Seleccione una opción --</option>
-        <option *ngFor="let esp of especialidades" [value]="esp.id_especialidad">
-          {{ esp.especialidad }}
+        <option *ngFor="let esp of especialidades" [value]="esp.idespecialidad">
+          {{ esp.nomespe}}
         </option>
       </select>
     </div>
 
     <div class="select-wrapper">
       <label for="medico">Seleccione un médico:</label>
-      <select id="medico"
-              [(ngModel)]="seleccionMedico"
-              (change)="onMedicoChange()"
-              [disabled]="!seleccionadaEspecialidad">
-        <option disabled selected value="">-- Seleccione un medico --        </option>
+      <select id="medico" [(ngModel)]="seleccionMedico" (change)="onMedicoChange()"
+        [disabled]="!seleccionadaEspecialidad">
+        <option disabled selected value="">-- Seleccione un medico -- </option>
         <ng-container *ngIf="seleccionadaEspecialidad">
-          <option *ngFor="let medico of medicos" [value]="medico.id_medico">
+          <option *ngFor="let medico of medicos" [value]="medico.idmedico">
             {{ getNombreCompleto(medico) }}
           </option>
         </ng-container>
@@ -35,12 +33,8 @@
           <h4>Fechas</h4>
         </div>
         <div class="fechas-grid">
-          <div
-            *ngFor="let fecha of fechasDisponibles"
-            class="fecha-item"
-            [class.selected]="fecha === fechaSeleccionada"
-            (click)="seleccionarFecha(fecha)"
-          >
+          <div *ngFor="let fecha of fechasDisponibles" class="fecha-item" [class.selected]="fecha === fechaSeleccionada"
+            (click)="seleccionarFecha(fecha)">
             {{ fecha }}
           </div>
         </div>
@@ -50,22 +44,22 @@
           <h4>Horas disponibles</h4>
         </div>
         <app-horario
-          *ngIf="horarioId"
-          [horarioId]="horarioId"
-          [idEspecialidad]="seleccionadaEspecialidad"
-          [idMedico]="seleccionMedico"
-          [horaSeleccionadaMarcada]="horaSeleccionada"
-          (horaSeleccionada)="onHoraSeleccionada($event)"
-        ></app-horario>
+            *ngIf="horarioId"
+            [horarioId]="horarioId"
+            [fechaSeleccionada]="fechaSeleccionada"
+            [idEspecialidad]="seleccionadaEspecialidad"
+            [idMedico]="seleccionMedico"
+            [horaSeleccionadaMarcada]="horaSeleccionada"
+            (horaSeleccionada)="onHoraSeleccionada($event)">  
+        </app-horario>
+
+
       </div>
     </div>
-      <div 
-        *ngIf="horaSeleccionada"
-        class="agendar-cita-btn-wrapper"
-      >
-        <button class="agendar-cita-btn" (click)="agendarCita()">
-          Agendar cita
-        </button>
-      </div>
+    <div *ngIf="horaSeleccionada" class="agendar-cita-btn-wrapper">
+      <button class="agendar-cita-btn" (click)="agendarCita()">
+        Agendar cita
+      </button>
+    </div>
   </div>
 </div>
